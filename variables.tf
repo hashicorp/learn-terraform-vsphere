@@ -17,25 +17,21 @@ variable "vsphere_server" {
 variable "vsphere_dc" {
   description = "vSphere data center"
   type        = string
-  default     = "PacketDatacenter"
 }
 
 variable "datastore_name" {
   description = "vSphere datastore"
   type        = string
-  default     = "datastore1"
 }
 
 variable "resource_pool_name" {
   description = "vSphere resource pool"
   type        = string
-  default     = "Demo-ResourcePool"
 }
 
 variable "network_name" {
   description = "vSphere network name"
   type        = string
-  default     = "VM Network"
 }
 
 variable "centos_name" {

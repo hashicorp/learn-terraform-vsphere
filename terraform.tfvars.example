@@ -1,0 +1,7 @@
+username           = ""
+vsphere_server     = ""
+vsphere_dc         = "PacketDatacenter"
+datastore_name     = "datastore1"
+resource_pool_name = "Demo-ResourcePool"
+network_name       = "VM Network"
+centos_name        = ""
