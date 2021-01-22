@@ -1,4 +1,5 @@
 username           = ""
+password           = ""
 vsphere_server     = ""
 vsphere_dc         = "PacketDatacenter"
 datastore_name     = "datastore1"
