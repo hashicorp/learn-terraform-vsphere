@@ -42,9 +42,3 @@ variable "centos_name" {
   description = "CentOS name (ie: template_folder/image_path)"
   type        = string
 }
-
-variable "vm_prefix" {
-  description = "vSphere data center"
-  type        = string
-  default     = "PacketDatacenter"
-}

@@ -1,13 +1,31 @@
 {
+  "description": "CentOS 7 Template",
+  "variables": {
+    "vsphere_server": "",
+    "username": "",
+    "password": "",
+    "datacenter": "",
+    "datastore": "",
+    "resource_pool": "",
+    "network_name": ""
+  },
   "builders": [
     {
       "type": "vsphere-iso",
-      "name": "Centos7",
-      "vm_name": "Centos7",
+      "vcenter_server": "{{user `vsphere_server` }}",
+      "insecure_connection": "true",
+      "username": "{{user `username` }}",
+      "password": "{{user `password` }}",
+      "datacenter": "{{user `datacenter` }}",
+      "datastore": "{{user `datastore` }}",
+      "resource_pool": "{{user `resource_pool` }}",
+      "name": "CentOS7",
+      "vm_name": "CentOS7",
+      "notes": "Build via Packer",
       "guest_os_type": "centos7_64Guest",
       "convert_to_template": true,
       "CPUs": 2,
-      "RAM": 4096,
+      "RAM": 1024,
       "storage": [
         {
           "disk_size": 20000,
@@ -16,7 +34,7 @@
       ],
       "network_adapters": [
         {
-          "network": "VM Network",
+          "network": "user `network_name`",
           "network_card": "vmxnet3"
         }
       ],
@@ -34,13 +52,6 @@
       "ssh_port": 22,
       "ssh_wait_timeout": "10m",
       "shutdown_command": "echo 'vagrant'|sudo -S /sbin/halt -h -p",
-      "vcenter_server": "{{user `vcenter_server` }}",
-      "host": "{{user `esxi_host` }}",
-      "username": "{{user `esxi_username` }}",
-      "password": "{{user `esxi_password` }}",
-      "cluster": "Test",
-      "datastore": "Local",
-      "insecure_connection": "true",
       "http_directory": "preseeds",
       "http_port_min": 9001,
       "http_port_max": 9001
