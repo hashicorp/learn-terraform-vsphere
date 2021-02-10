@@ -1,0 +1,7 @@
+vsphere_server = ""
+username = ""
+password = ""
+datacenter = "PacketDatacenter"
+datastore = "datastore1"
+network_name = "VM Network"
+resource_pool = "Demo-ResourcePool"

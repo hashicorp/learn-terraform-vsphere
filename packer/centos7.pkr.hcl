@@ -15,22 +15,22 @@ variable "password" {
 
 variable "datacenter" {
   type    = string
-  default = "PacketDatacenter"
+  default = ""
 }
 
 variable "datastore" {
   type    = string
-  default = "datastore1"
+  default = ""
 }
 
 variable "network_name" {
   type    = string
-  default = "VM Network"
+  default = ""
 }
 
 variable "resource_pool" {
   type    = string
-  default = "Demo-ResourcePool"
+  default = ""
 }
 
 # "timestamp" template function replacement
