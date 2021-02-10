@@ -1,9 +1,0 @@
-{
-    "vsphere_server": "",
-    "username": "",
-    "password": "",
-    "datacenter": "PacketDatacenter",
-    "datastore": "datastore1",
-    "resource_pool": "Demo-ResourcePool",
-    "network_name": "VM Network"
-}
