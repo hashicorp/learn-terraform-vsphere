@@ -1,5 +1,6 @@
 # Packer variable files
 *.pkrvars.hcl
+**/packer_cache/*
 
 # Local .terraform directories
 **/.terraform/*
