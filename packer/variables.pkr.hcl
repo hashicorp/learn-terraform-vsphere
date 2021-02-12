@@ -3,12 +3,12 @@ variable "vsphere_server" {
   default = ""
 }
 
-variable "vcenter_user" {
+variable "vsphere_user" {
   type    = string
   default = ""
 }
 
-variable "vcenter_password" {
+variable "vsphere_password" {
   type    = string
   default = ""
 }
@@ -29,11 +29,6 @@ variable "datastore" {
 }
 
 variable "network_name" {
-  type    = string
-  default = ""
-}
-
-variable "resource_pool" {
   type    = string
   default = ""
 }

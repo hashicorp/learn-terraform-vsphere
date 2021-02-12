@@ -1,23 +1,23 @@
 provider "vsphere" {
-  user           = var.username
-  password       = var.password
-  vsphere_server = var.vsphere_username
+  vsphere_server = var.vsphere_server
+  user           = var.vsphere_user
+  password       = var.vsphere_password
 
   # If you have a self-signed cert
   allow_unverified_ssl = true
 }
 
 data "vsphere_datacenter" "dc" {
-  name = var.vsphere_dc
+  name = var.datacenter
 }
 
-data "vsphere_datastore" "datastore" {
-  name          = var.datastore_name
+data "vsphere_compute_cluster" "cluster" {
+  name          = var.cluster
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
-data "vsphere_resource_pool" "pool" {
-  name          = var.resource_pool_name
+data "vsphere_datastore" "datastore" {
+  name          = var.datastore
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
@@ -26,14 +26,14 @@ data "vsphere_network" "network" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
-data "vsphere_virtual_machine" "centos7" {
-  name          = "/${var.vsphere_dc}/vm/${var.centos_name}"
+data "vsphere_virtual_machine" "ubuntu" {
+  name          = "/${var.datacenter}/vm/${var.ubuntu_name}"
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 
 resource "vsphere_virtual_machine" "learn" {
   name             = "learn-terraform"
-  resource_pool_id = data.vsphere_resource_pool.pool.id
+  resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id
   datastore_id     = data.vsphere_datastore.datastore.id
 
   num_cpus = 2
@@ -49,10 +49,16 @@ resource "vsphere_virtual_machine" "learn" {
   disk {
     label            = "disk0"
     thin_provisioned = true
-    size             = 20
+    size             = 32
   }
 
+  guest_id = "ubuntu64Guest"
+
   clone {
-    template_uuid = data.vsphere_virtual_machine.centos7.id
+    template_uuid = data.vsphere_virtual_machine.ubuntu.id
   }
+}
+
+output "vm_ip" {
+  value = vsphere_virtual_machine.learn.guest_ip_addresses
 }
