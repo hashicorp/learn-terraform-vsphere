@@ -24,10 +24,8 @@ source "vsphere-iso" "this" {
       disk_thin_provisioned = true
   }
 
-  iso_urls = [
-    "http://releases.ubuntu.com/16.04/ubuntu-16.04.7-server-amd64.iso"
-  ]
-  iso_checksum = "sha256:b23488689e16cad7a269eb2d3a3bf725d3457ee6b0868e00c8762d3816e25848"
+  iso_paths = ["[vsanDatastore] Installers/ubuntu-14.04.1-server-amd64.iso"]
+  // iso_checksum = "sha256:b23488689e16cad7a269eb2d3a3bf725d3457ee6b0868e00c8762d3816e25848"
 
   network_adapters {
       network =  var.network_name
@@ -35,7 +33,7 @@ source "vsphere-iso" "this" {
   }
 
   floppy_files = [
-    "./preseed_hardcoded_ip.cfg"
+    "./preseed.cfg"
   ]
 
   boot_command = [
@@ -53,7 +51,7 @@ source "vsphere-iso" "this" {
     " initrd=/install/initrd.gz",
     " priority=critical",
     " locale=en_US",
-    " file=/media/preseed_hardcoded_ip.cfg",
+    " file=/media/preseed.cfg",
     "<enter>"
   ]
 }
