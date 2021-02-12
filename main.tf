@@ -62,3 +62,13 @@ resource "vsphere_virtual_machine" "learn" {
 output "vm_ip" {
   value = vsphere_virtual_machine.learn.guest_ip_addresses
 }
+
+resource "vsphere_virtual_machine_snapshot" "learn" {
+  virtual_machine_uuid = vsphere_virtual_machine_snapshot.learn.id
+  snapshot_name        = "learn-tf-ubuntu"
+  description          = "Created using Terraform"
+  memory               = "true"
+  quiesce              = "true"
+  remove_children      = "false"
+  consolidate          = "true"
+}
