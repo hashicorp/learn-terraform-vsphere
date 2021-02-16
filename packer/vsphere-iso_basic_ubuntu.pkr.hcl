@@ -1,5 +1,5 @@
 source "vsphere-iso" "this" {
-  vsphere_server    = var.vsphere_server
+  vcenter_server    = var.vsphere_server
   username          = var.vsphere_user
   password          = var.vsphere_password
   datacenter        = var.datacenter
