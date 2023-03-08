@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 source "vsphere-iso" "this" {
   vcenter_server    = var.vsphere_server
   username          = var.vsphere_user
