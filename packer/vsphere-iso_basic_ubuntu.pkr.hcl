@@ -1,66 +1,60 @@
 source "vsphere-iso" "this" {
-  vcenter_server    = var.vsphere_server
-  username          = var.vsphere_user
-  password          = var.vsphere_password
-  datacenter        = var.datacenter
-  cluster           = var.cluster
-  insecure_connection  = true
+  vcenter_server      = var.vsphere_server
+  username            = var.vsphere_user
+  password            = var.vsphere_password
+  datacenter          = var.datacenter
+  cluster             = var.cluster
+  insecure_connection = true
 
-  vm_name = "tf-edu-ubuntu"
+  vm_name       = "tf-edu-ubuntu"
   guest_os_type = "ubuntu64Guest"
 
   ssh_username = "vagrant"
   ssh_password = "vagrant"
+  ssh_host = "127.0.0.1"
+  ssh_port = 2222
 
-  CPUs =             1
-  RAM =              1024
+  CPUs            = 1
+  RAM             = 1024
   RAM_reserve_all = true
 
-  disk_controller_type =  ["pvscsi"]
-  datastore = var.datastore
+
+  configuration_parameters = {
+    "RUN.container" : "lscr.io/linuxserver/openssh-server:latest"
+    "RUN.mountdmi"  : "false"
+    "RUN.port.2222" : "2222"
+    "RUN.env.USER_NAME" : "vagrant"
+    "RUN.env.USER_PASSWORD" : "vagrant"
+    "RUN.env.PASSWORD_ACCESS" : "true"
+  }
+
+
+  disk_controller_type = ["pvscsi"]
+  datastore            = var.datastore
   storage {
-    disk_size =        16384
+    disk_size             = 16384
     disk_thin_provisioned = true
   }
 
-  iso_paths = ["[vsanDatastore] Installers/ubuntu-14.04.1-server-amd64.iso"]
-  // iso_checksum = "sha256:b23488689e16cad7a269eb2d3a3bf725d3457ee6b0868e00c8762d3816e25848"
-
+  iso_paths = ["ubuntu.iso"]
+  
   network_adapters {
-    network =  var.network_name
-    network_card = "vmxnet3"
+    network      = var.network_name
   }
 
   floppy_files = [
     "./preseed.cfg"
   ]
 
-  boot_command = [
-    "<enter><wait><f6><wait><esc><wait>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs>",
-    "/install/vmlinuz",
-    " initrd=/install/initrd.gz",
-    " priority=critical",
-    " locale=en_US",
-    " file=/media/preseed.cfg",
-    "<enter>"
-  ]
+
 }
 
 build {
-  sources  = [
+  sources = [
     "source.vsphere-iso.this"
   ]
 
   provisioner "shell-local" {
-    inline  = ["echo the address is: $PACKER_HTTP_ADDR and build name is: $PACKER_BUILD_NAME"]
+    inline = ["echo the address is: $PACKER_HTTP_ADDR and build name is: $PACKER_BUILD_NAME"]
   }
 }
