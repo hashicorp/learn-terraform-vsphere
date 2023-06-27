@@ -40,16 +40,16 @@ resource "vsphere_virtual_machine" "learn" {
   memory   = 1024
 
   network_interface {
-    network_id   = data.vsphere_network.network.id
+    network_id = data.vsphere_network.network.id
   }
 
   wait_for_guest_net_timeout = -1
-  wait_for_guest_ip_timeout = -1
+  wait_for_guest_ip_timeout  = -1
 
   disk {
-    label = "disk0"
+    label            = "disk0"
     thin_provisioned = true
-    size  = 32
+    size             = 32
   }
 
   guest_id = "ubuntu64Guest"
