@@ -24,6 +24,11 @@ variable "cluster" {
   type        = string
 }
 
+variable "resource_pool" {
+  description = "vSphere resource pool"
+  type        = string
+}
+
 variable "datastore" {
   description = "vSphere datastore"
   type        = string
@@ -35,6 +40,6 @@ variable "network_name" {
 }
 
 variable "ubuntu_name" {
-  description = "CentOS name (ie: image_path)"
+  description = "Ubuntu name (ie: image_path)"
   type        = string
 }
