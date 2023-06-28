@@ -9,22 +9,24 @@ source "vsphere-iso" "this" {
   vm_name       = "tf-edu-ubuntu"
   guest_os_type = "ubuntu64Guest"
 
-  ssh_username = "vagrant"
-  ssh_password = "vagrant"
+  CPUs            = 2
+  RAM             = 2048
+  RAM_reserve_all = true
+
+  ssh_username = "ubuntu"
+  ssh_password = "ubuntu"
+  ssh_timeout  = "30m"
+
+  /* Uncomment when running on vcsim
   ssh_host     = "127.0.0.1"
   ssh_port     = 2222
 
-  CPUs            = 2
-  RAM             = 1024
-  RAM_reserve_all = true
-
-  /* Uncomment when running on vcsim
   configuration_parameters = {
     "RUN.container" : "lscr.io/linuxserver/openssh-server:latest"
     "RUN.mountdmi" : "false"
     "RUN.port.2222" : "2222"
-    "RUN.env.USER_NAME" : "vagrant"
-    "RUN.env.USER_PASSWORD" : "vagrant"
+    "RUN.env.USER_NAME" : "ubuntu"
+    "RUN.env.USER_PASSWORD" : "ubuntu"
     "RUN.env.PASSWORD_ACCESS" : "true"
   }
   */
@@ -36,16 +38,16 @@ source "vsphere-iso" "this" {
     disk_thin_provisioned = true
   }
 
-  iso_paths = ["ubuntu.iso"]
+  iso_paths = ["[vsanDatastore] ISO/ubuntu-22.04.1-live-server-amd64.iso"]
 
   network_adapters {
     network = var.network_name
   }
 
-  floppy_files = [
-    "./preseed.cfg"
-  ]
-
+  cd_files = ["./meta-data", "./user-data"]
+  cd_label = "cidata"
+  
+  boot_command = ["<wait>e<down><down><down><end> autoinstall ds=nocloud;<F10>"]
 
 }
 
