@@ -24,11 +24,6 @@ variable "cluster" {
   type        = string
 }
 
-variable "resource_pool" {
-  description = "vSphere resource pool"
-  type        = string
-}
-
 variable "datastore" {
   description = "vSphere datastore"
   type        = string
