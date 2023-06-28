@@ -14,7 +14,7 @@ source "vsphere-iso" "this" {
   ssh_host     = "127.0.0.1"
   ssh_port     = 2222
 
-  CPUs            = 1
+  CPUs            = 2
   RAM             = 1024
   RAM_reserve_all = true
 
