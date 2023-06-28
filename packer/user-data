@@ -8,3 +8,5 @@ autoinstall:
   ssh:
     install-server: true
     allow-pw: true
+  packages:
+    - open-vm-tools
