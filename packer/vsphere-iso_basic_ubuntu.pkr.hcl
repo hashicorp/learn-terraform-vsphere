@@ -11,23 +11,22 @@ source "vsphere-iso" "this" {
 
   ssh_username = "vagrant"
   ssh_password = "vagrant"
-  ssh_host = "127.0.0.1"
-  ssh_port = 2222
+  ssh_host     = "127.0.0.1"
+  ssh_port     = 2222
 
   CPUs            = 1
   RAM             = 1024
   RAM_reserve_all = true
 
-  /* Uncomment when running on vcsim
+
   configuration_parameters = {
     "RUN.container" : "lscr.io/linuxserver/openssh-server:latest"
-    "RUN.mountdmi"  : "false"
+    "RUN.mountdmi" : "false"
     "RUN.port.2222" : "2222"
     "RUN.env.USER_NAME" : "vagrant"
     "RUN.env.USER_PASSWORD" : "vagrant"
     "RUN.env.PASSWORD_ACCESS" : "true"
   }
-  */
 
   disk_controller_type = ["pvscsi"]
   datastore            = var.datastore
@@ -37,9 +36,9 @@ source "vsphere-iso" "this" {
   }
 
   iso_paths = ["ubuntu.iso"]
-  
+
   network_adapters {
-    network      = var.network_name
+    network = var.network_name
   }
 
   floppy_files = [
