@@ -36,7 +36,7 @@ resource "vsphere_virtual_machine" "learn" {
   resource_pool_id = data.vsphere_resource_pool.pool.id
   datastore_id     = data.vsphere_datastore.datastore.id
 
-  num_cpus = 1
+  num_cpus = 2
   memory   = 1024
 
   network_interface {
