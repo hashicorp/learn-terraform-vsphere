@@ -18,7 +18,7 @@ source "vsphere-iso" "this" {
   RAM             = 1024
   RAM_reserve_all = true
 
-
+  /* Uncomment when running on vcsim
   configuration_parameters = {
     "RUN.container" : "lscr.io/linuxserver/openssh-server:latest"
     "RUN.mountdmi" : "false"
@@ -27,6 +27,7 @@ source "vsphere-iso" "this" {
     "RUN.env.USER_PASSWORD" : "vagrant"
     "RUN.env.PASSWORD_ACCESS" : "true"
   }
+  */
 
   disk_controller_type = ["pvscsi"]
   datastore            = var.datastore
