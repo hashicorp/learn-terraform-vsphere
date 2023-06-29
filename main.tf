@@ -16,7 +16,7 @@ data "vsphere_datastore" "datastore" {
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
 
-data "vsphere_compute_cluster" "vsphere_compute_cluster" {
+data "vsphere_compute_cluster" "cluster" {
   name          = var.cluster
   datacenter_id = data.vsphere_datacenter.datacenter.id
 }
@@ -33,7 +33,7 @@ data "vsphere_virtual_machine" "ubuntu" {
 
 resource "vsphere_virtual_machine" "learn" {
   name             = "learn-terraform"
-  resource_pool_id = data.vsphere_compute_cluster.vsphere_compute_cluster.resource_pool_id
+  resource_pool_id = data.vsphere_compute_cluster.cluster.resource_pool_id
   datastore_id     = data.vsphere_datastore.datastore.id
 
   num_cpus = 2
