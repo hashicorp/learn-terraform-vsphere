@@ -38,6 +38,6 @@ variable "network_name" {
 }
 
 variable "ubuntu_name" {
-  description = "CentOS name (ie: image_path)"
+  description = "Ubuntu name (ie: image_path)"
   type        = string
 }
