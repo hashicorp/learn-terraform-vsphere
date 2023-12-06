@@ -1,6 +1,15 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
+packer {
+  required_plugins {
+    vsphere = {
+      version = ">= 1.2.3"
+      source  = "github.com/hashicorp/vsphere"
+    }
+  }
+}
+
 source "vsphere-iso" "this" {
   vcenter_server      = var.vsphere_server
   username            = var.vsphere_user
